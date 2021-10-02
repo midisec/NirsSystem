@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, redirect, url_for
 
 
 bp = Blueprint("front", __name__)
@@ -6,4 +6,4 @@ bp = Blueprint("front", __name__)
 
 @bp.route('/')
 def index():
-    return "Hello world"
+    return redirect(url_for('system.login'))
