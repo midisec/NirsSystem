@@ -3,6 +3,8 @@ import config
 from apps.system import bp as system_bp
 from apps.common import bp as common_bp
 from apps.front import bp as front_bp
+from exts import db, csrf
+
 
 app = Flask(__name__)
 
@@ -14,6 +16,9 @@ def create_app():
     app.register_blueprint(system_bp)
     app.register_blueprint(common_bp)
     app.register_blueprint(front_bp)
+
+    db.init_app(app)
+    csrf.init_app(app)
     return app
 
 
