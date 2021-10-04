@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  myweb:
+    build: .
+    ports:
+    - "8081:8081"
+    volumes:
+    - .:/app
+    depends_on:
+    - mymsql
+  mymsql:
+      restart: always
+      image: mysql:5.7.16
+      container_name: mymsql
+      volumes:
+        - ./mydir:/mydir
+        - ./datadir:/var/lib/mysql
+        - ./mysql/conf/my.cnf:/etc/my.cnf
+        #      数据库还原目录 可将需要还原的sql文件放在这里
+        - ./mysql/source:/docker-entrypoint-initdb.d
+      environment:
+        - "MYSQL_ROOT_PASSWORD=wanmidi"
+        - "MYSQL_DATABASE=nirsdb"
+        - "TZ=Asia/Shanghai"

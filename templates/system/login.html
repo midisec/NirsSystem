@@ -35,6 +35,7 @@
 								<p class="account-subtitle">近红外光谱API实例化系统</p>
 
 								<form method="post">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 									<div class="form-group">
 										<label class="form-control-label">邮箱</label>
 										<input type="email" name="email" class="form-control">

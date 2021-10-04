@@ -13,3 +13,5 @@ PASSWORD = 'wanmidi'
 DB_URI = "mysql+pymysql://{username}:{password}@{host}:{port}/{db}?charset=utf8".format(username=USERNAME,password=PASSWORD,host=HOSTNAME,port=PORT,db=DATABASE)
 SQLALCHEMY_DATABASE_URI = DB_URI
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+SYSTEM_USER_ID = 'AMFASKFKA'

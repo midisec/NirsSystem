@@ -1,7 +1,19 @@
-from flask import Blueprint, views, render_template, request, redirect, url_for
+from flask import Blueprint, views, render_template, request, redirect, url_for, session
 from .forms import LoginForm
+from .models import User_Model
+from exts import db,csrf
+
+import config
+from datetime import datetime
+
 
 bp = Blueprint("system", __name__,url_prefix='/system')
+
+
+@bp.route('/index/')
+# @login_required
+def index():
+    return "index test"
 
 
 class LoginView(views.MethodView):
@@ -15,27 +27,21 @@ class LoginView(views.MethodView):
             password = form.password.data
             remember = form.remember.data
 
-            print(email)
-            print(password)
-            print(remember)
+            user = User_Model.query.filter_by(email=email).first()
+            if user and user.check_password(password):
+                session[config.SYSTEM_USER_ID] = user.id
+                user.last_login_time = datetime.now()
 
-            # user = User_Model.query.filter_by(email=email).first()
-            # if user and user.check_password(password):
-            #     session[config.SYSTEM_USER_ID] = user.id
-            #     user.last_login_time = datetime.now()
-            #
-            #     # 日志，先没加了
-            #     # log_signal.send(username=user.username, email=user.email, method="用户登录")
-            #
-            #     db.session.commit()
-            #     if remember:
-            #         # 过期时间为31天
-            #         session.permanent = True
-            #
-            #     return redirect(url_for('system.index'))
-            #     # return "success"
-            # else:
-            #     return self.get(message='邮箱或密码错误')
+                # 日志，先没加了
+                # log_signal.send(username=user.username, email=user.email, method="用户登录")
+
+                db.session.commit()
+                if remember:
+                    # 过期时间为31天
+                    session.permanent = True
+                return redirect(url_for('system.index'))
+            else:
+                return self.get(message='邮箱或密码错误')
 
         else:
             print(form.errors)
