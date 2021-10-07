@@ -1,7 +1,7 @@
 from flask import Blueprint, views, render_template, request, redirect, url_for, session
 from .forms import LoginForm
 from .models import User_Model
-from exts import db,csrf
+from exts import db, csrf
 
 import config
 from datetime import datetime
@@ -13,7 +13,7 @@ bp = Blueprint("system", __name__,url_prefix='/system')
 @bp.route('/index/')
 # @login_required
 def index():
-    return "index test"
+    return render_template('system/index.html')
 
 
 class LoginView(views.MethodView):

@@ -1929,7 +1929,7 @@ button.bg-danger:hover {
 }
 
 .header .header-left .logo img {
-	max-height: 52px;
+	max-height: 32px;
 	width: auto;
 }
 
@@ -4022,7 +4022,7 @@ table.table-inbox tbody tr.checked {
 }
 
 .logo-dark{
-	max-width: 120px;
+	max-width: 160px;
 	margin: auto;
     display: block;
 }

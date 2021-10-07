@@ -1,0 +1,284 @@
+{% from "common/_macros.html" import static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<title>{% block title %}{% endblock %}</title>
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='system/assets/img/favicon.png') }}">
+
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/css/bootstrap.min.css') }}">
+
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/plugins/fontawesome/css/fontawesome.min.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/plugins/fontawesome/css/all.min.css') }}">
+
+		<!-- Feathericon CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/css/feather.css') }}">
+
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/css/style.css') }}">
+	</head>
+	<body>
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+			<!-- Header -->
+			<div class="header">
+				<!-- Logo -->
+				<div class="header-left">
+					<a href="{{ url_for('system.index') }}" class="logo">
+						<img src="{{ url_for('static', filename='system/assets/img/logo_font.png') }}" alt="Logo">
+					</a>
+					<a href="{{ url_for('system.index') }}" class="logo logo-small">
+						<img src="{{ url_for('static', filename='system/assets/img/logo_half.png') }}" alt="Logo" width="30" height="30">
+					</a>
+				</div>
+				<!-- /Logo -->
+				<a href="javascript:void(0);" id="toggle_btn">	<i class="fas fa-bars"></i>
+				</a>
+				<div class="top-nav-search">
+					<form>
+						<input type="text" class="form-control" placeholder="搜索">
+						<button class="btn" type="submit"><i class="fa fa-search"></i>
+						</button>
+					</form>
+				</div>
+				<!-- Mobile Menu Toggle -->
+				<a class="mobile_btn" id="mobile_btn">	<i class="fas fa-bars"></i>
+				</a>
+				<!-- /Mobile Menu Toggle -->
+				<!-- Header Right Menu -->
+				<ul class="nav user-menu">
+
+					<!-- Notifications -->
+					<li class="nav-item dropdown">
+						<a href="#" class="nav-link notifications-item">
+							<i class="feather-bell"></i> <span class="badge badge-pill">3</span>
+						</a>
+					</li>
+					<!-- /Notifications -->
+					<!-- Chat -->
+					<li class="nav-item dropdown">
+						<a href="chat.html" class="dropdown-toggle nav-link chat-header">
+							<i class="feather-message-square"></i> <span class="badge badge-pill header-chat">6</span>
+						</a>
+					</li>
+					<!-- /Chat -->
+					<li class="nav-item dropdown has-arrow main-drop ml-md-3">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+							<span class="user-img"><img src="{{ url_for('static', filename='system/assets/img/avatar.jpg') }}" alt="">
+							<span class="status online"></span></span>
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#"><i class="feather-user"></i> 个人信息</a>
+							<a class="dropdown-item" href="#"><i class="feather-power"></i> 注销</a>
+						</div>
+					</li>
+				</ul>
+				<!-- /Header Right Menu -->
+			</div>
+			<!-- /Header -->
+
+			<!-- Sidebar -->
+			<div class="sidebar" id="sidebar">
+				<div class="sidebar-inner slimscroll">
+					<div id="sidebar-menu" class="sidebar-menu">
+						<ul>
+							<li class="menu-title">	<span>Main</span>
+							</li>
+							<li><a href="{{ url_for('system.index') }}"><i class="feather-home"></i><span>首页</span></a>
+							</li>
+							<li class="submenu"><a href="#"><i class="feather-list"></i> <span>功能实例</span><span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+									<li><a href="#">样本信息</a></li>
+									<li><a href="#">样本处理</a></li>
+									<li><a href="#">样本结果</a></li>
+								</ul>
+							</li>
+
+                            <li class="submenu">
+								<a href="javascript:void(0);"><i class="feather-book"></i> <span>数据处理</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+									<li><a href="#">光谱数据可视化</a></li>
+
+								</ul>
+							</li>
+
+                            <li class="submenu">
+								<a href="#"><i class="feather-settings"></i> <span>设置</span><span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+									<li><a href="#">个人信息</a></li>
+									<li><a href="#">修改密码</a></li>
+									<li><a href="#">修改邮箱</a></li>
+									<li><a href="#">消息中心</a></li>
+								</ul>
+							</li>
+
+							<li class="submenu">
+								<a href="#"><i class="feather-grid"></i> <span> 权限管理</span> <span class="menu-arrow"></span></a>
+								<ul>
+									<li><a href="#">用户管理</a></li>
+									<li><a href="#">角色管理</a></li>
+								</ul>
+							</li>
+
+
+                            <li class="submenu">
+								<a href="#"><i class="feather-disc"></i> <span> 系统日志</span> <span class="menu-arrow"></span></a>
+								<ul style="display: none;">
+									<li><a href="#">操作日志</a></li>
+									<li><a href="#">状态监控</a></li>
+								</ul>
+							</li>
+
+
+
+							<li class="menu-title">
+								<span>帮助</span>
+							</li>
+							<li>
+								<a href="#"><i class="feather-layers"></i> <span>支持</span></a>
+							</li>
+                            <li>
+								<a href="#"><i class="feather-file"></i> <span>文档</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- /Sidebar -->
+
+			<!-- Page Wrapper -->
+            <div class="page-wrapper">
+                <div class="content container-fluid">
+
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="row align-items-center">
+							<div class="col-md-12">
+								<div class="d-flex align-items-center">
+									<h5 class="page-title">{% block pagetitle1 %}{% endblock %}</h5>
+									<ul class="breadcrumb ml-2">
+										<li class="breadcrumb-item"><a href="{{ url_for('system.index') }}"><i class="fas fa-home"></i></a></li>
+										<li class="breadcrumb-item"><a href="{{ url_for('system.index') }}">首页</a></li>
+										<li class="breadcrumb-item active">{% block pagetitle2 %}{% endblock %}</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /Page Header -->
+
+					<div class="row">
+						<div class="col-sm-12">
+							{% block main_content %}{% endblock %}
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<!-- /Page Wrapper -->
+
+			<!-- Notification -->
+			<div class="notifications">
+				<div class="topnav-dropdown-header">
+					<span class="notification-title">Notifications</span>
+					<a href="javascript:void(0)" class="clear-noti"> <i class="feather-x-circle"></i> </a>
+				</div>
+				<div class="noti-content">
+					<ul class="notification-list">
+						<li class="notification-message">
+							<a href="#">
+								<div class="media">
+									<span class="avatar">
+									<img alt="" src="assets/img/profiles/avatar-02.jpg" class="rounded-circle">
+									</span>
+									<div class="media-body">
+										<p class="noti-details"><span class="noti-title">John Doe</span> added new task <span class="noti-title">Patient appointment booking</span></p>
+										<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li class="notification-message">
+							<a href="#">
+								<div class="media">
+									<span class="avatar">
+									<img alt="" src="assets/img/profiles/avatar-03.jpg" class="rounded-circle">
+									</span>
+									<div class="media-body">
+										<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
+										<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li class="notification-message">
+							<a href="#">
+								<div class="media">
+									<span class="avatar">
+									<img alt="" src="assets/img/profiles/avatar-06.jpg" class="rounded-circle">
+									</span>
+									<div class="media-body">
+										<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
+										<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li class="notification-message">
+							<a href="#">
+								<div class="media">
+									<span class="avatar">
+									<img alt="" src="assets/img/profiles/avatar-17.jpg" class="rounded-circle">
+									</span>
+									<div class="media-body">
+										<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
+										<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li class="notification-message">
+							<a href="#">
+								<div class="media">
+									<span class="avatar">
+									<img alt="" src="assets/img/profiles/avatar-13.jpg" class="rounded-circle">
+									</span>
+									<div class="media-body">
+										<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
+										<p class="noti-time"><span class="notification-time">2 days ago</span></p>
+									</div>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="topnav-dropdown-footer">
+					<a href="javascript:void(0);">View all Notifications</a>
+				</div>
+			</div>
+			<!-- /Notification -->
+        </div>
+		<!-- /Main Wrapper -->
+
+		<!-- jQuery -->
+		<script src="{{ url_for('static', filename='system/assets/js/jquery-3.6.0.min.js') }}"></script>
+
+		<!-- Bootstrap Core JS -->
+		<script src="{{ url_for('static', filename='system/assets/js/bootstrap.bundle.min.js') }}"></script>
+
+		<!-- Slimscroll JS -->
+        <script src="{{ url_for('static', filename='system/assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+		<!-- Custom JS -->
+		<script  src="{{ url_for('static', filename='system/assets/js/script.js') }}"></script>
+
+
+    </body>
+</html>
