@@ -93,13 +93,13 @@
 						<ul>
 							<li class="menu-title">	<span>Main</span>
 							</li>
-							<li><a href="{{ url_for('system.index') }}"><i class="feather-home"></i><span>首页</span></a>
+							<li name="index"><a href="{{ url_for('system.index') }}"><i class="feather-home"></i><span>首页</span></a>
 							</li>
-							<li class="submenu"><a href="#"><i class="feather-list"></i> <span>功能实例</span><span class="menu-arrow"></span></a>
+							<li name="sample" class="submenu"><a href="#"><i class="feather-list"></i> <span>功能实例</span><span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
 									<li><a href="{{ url_for('system.sample_total') }}">样本信息</a></li>
 									<li><a href="{{ url_for('system.sample_handle') }}">样本处理</a></li>
-									<li><a href="#">样本结果</a></li>
+									<li><a href="{{ url_for('system.sample_result') }}">样本结果</a></li>
 								</ul>
 							</li>
 
@@ -284,7 +284,7 @@
 
 		<!-- Custom JS -->
 		<script  src="{{ url_for('static', filename='system/assets/js/script.js') }}"></script>
-
+        <script  src="{{ url_for('static', filename='system/js/base.js') }}"></script>
 
     </body>
 </html>

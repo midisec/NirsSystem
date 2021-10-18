@@ -16,16 +16,19 @@ def index():
     return render_template('system/index.html')
 
 
-
 @bp.route('/sample/total')
 def sample_total():
     return render_template('system/sample_total.html')
 
 
-
 @bp.route('/sample/handle')
 def sample_handle():
     return render_template('system/sample_handle.html')
+
+
+@bp.route('/sample/result')
+def sample_result():
+    return render_template('system/sample_result.html')
 
 
 

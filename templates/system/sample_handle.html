@@ -17,12 +17,34 @@
 {% block extend_css %}
 		<!-- Select2 CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/plugins/select2/css/select2.min.css') }}">
+
+    	<style type="text/css">
+            .fileinput-button {
+                position: relative;
+                display: inline-block;
+                overflow: hidden;
+            }
+
+            .fileinput-button input{
+                position:absolute;
+                right: 0px;
+                top: 0px;
+                opacity: 0;
+                -ms-filter: 'alpha(opacity=0)';
+                font-size: 200px;
+            }
+        </style>
+
+
 {% endblock %}
 
 
 {% block extend_js %}
         <!-- Select2 JS -->
 		<script src="{{ url_for('static', filename='system/assets/plugins/select2/js/select2.min.js') }}"></script>
+
+        <!-- this page JS -->
+        <script src="{{ url_for('static', filename='system/js/sample_handle.js') }}"></script>
 {% endblock %}
 
 
@@ -69,13 +91,14 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">数据上传:</label>
                             <div class="col-lg-9">
-                                <button type="button" class="btn btn-rounded btn-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">上传CSV文件</font></font></button>
+                                <button type="button" class="btn btn-rounded btn-info" data-toggle="modal" data-target="#staticBackdrop"><font style="vertical-align: inherit;" ><font style="vertical-align: inherit;">上传CSV文件</font></font></button>
                             </div>
+                            <row class="file_state" style="display: block;margin: 0 auto"></row>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-lg-12">
-                                <button type="button" style="display: block;margin:0 auto" class="btn btn-rounded btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保存</font></font></button>
+                                <button type="button" style="display: block;margin:0 auto" class="btn btn-rounded btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保存</font></font></button>
                             </div>
                         </div>
 
@@ -94,12 +117,12 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel">上传csv文件<h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
 
@@ -108,11 +131,11 @@
                   <li><strong>注意事项</strong>
                     <ul>
                       <li>一次仅能上传一个CSV文件，且文件大小不能超过5GB</li>
-                      <li>当CSV文件包含列名时，列名称可以包含字母、数字和下划线（_），但不能以下划线开头</li>
+                      <li>CSV文件第一行包含列名，从第二行开始即为需要预测的样本数据</li>
                       <li>文件内容以换行符（即字符“\n”，或称为LF）分隔各行，行内容以英文逗号（即字符“,”）分隔各列</li>
                       <li>文件中文本列取值长度不能超过4096个字符</li>
                       <li>文件必须至少包含两列，且不得超过1000列</li>
-                      <li>同一账户下所有表格数据集总行数不能超过1000万行</li>
+                      <li><br></li>
                     </ul>
                   </li>
             </ul>
@@ -121,7 +144,7 @@
               </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 {#          <button type="button" class="btn btn-success">上传</button>#}
 
             <span class="btn btn-success fileinput-button">
