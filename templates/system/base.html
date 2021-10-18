@@ -21,6 +21,8 @@
 		<!-- Feathericon CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/css/feather.css') }}">
 
+         {% block extend_css %}{% endblock %}
+
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='system/assets/css/style.css') }}">
 	</head>
@@ -95,8 +97,8 @@
 							</li>
 							<li class="submenu"><a href="#"><i class="feather-list"></i> <span>功能实例</span><span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
-									<li><a href="#">样本信息</a></li>
-									<li><a href="#">样本处理</a></li>
+									<li><a href="{{ url_for('system.sample_total') }}">样本信息</a></li>
+									<li><a href="{{ url_for('system.sample_handle') }}">样本处理</a></li>
 									<li><a href="#">样本结果</a></li>
 								</ul>
 							</li>
@@ -275,6 +277,10 @@
 
 		<!-- Slimscroll JS -->
         <script src="{{ url_for('static', filename='system/assets/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+
+        {% block extend_js %}{% endblock %}
+
 
 		<!-- Custom JS -->
 		<script  src="{{ url_for('static', filename='system/assets/js/script.js') }}"></script>

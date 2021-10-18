@@ -1,0 +1,85 @@
+{% extends 'system/base.html' %}
+{% from "common/_macros.html" import static %}
+
+
+{% block title %}
+    样本信息 - 近红外光谱API实例化系统
+{% endblock %}
+
+{% block pagetitle1 %}
+    样本信息
+{% endblock %}
+
+{% block pagetitle2 %}
+    样本信息
+{% endblock %}
+
+
+{% block extend_js %}
+
+    <!-- Datatables JS -->
+    <script src="{{ url_for('static', filename='system/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='system/assets/plugins/datatables/datatables.min.js') }}"></script>
+{% endblock %}
+
+
+{% block extend_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='system/assets/plugins/datatables/datatables.min.css') }}">
+{% endblock %}
+
+{% block main_content %}
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">样本总数据表</h4>
+            <p class="card-text">
+
+                <button type="button" class="btn btn-primary" style="float: right;">添加样本</button>
+            </p>
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="datatable table table-stripped">
+                    <thead>
+                        <tr>
+                            <th>样本名称</th>
+                            <th>样本地点</th>
+                            <th>样本采集人员</th>
+                            <th>样本时间</th>
+                            <th>创建时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>样本7</td>
+                            <td>经济楼</td>
+                            <td>学生5</td>
+                            <td>2021-04-22</td>
+                            <td>2021-04-22 20:28:56</td>
+                            <td class="text-right d-flex">
+                                <a href="#" class="btn btn-sm btn-white text-success mr-2 d-flex"><i class="far fa-edit mr-1"></i> 编辑</a>
+                                <a href="javascript:void(0);" class="btn btn-sm btn-white text-danger mr-2 d-flex"><i class="far fa-trash-alt mr-1"></i>删除</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>样本8</td>
+                            <td>经济楼</td>
+                            <td>学生5</td>
+                            <td>2021-04-22</td>
+                            <td>2021-04-22 20:28:56</td>
+                            <td class="text-right d-flex">
+                                <a href="#" class="btn btn-sm btn-white text-success mr-2 d-flex"><i class="far fa-edit mr-1"></i> 编辑</a>
+                                <a href="javascript:void(0);" class="btn btn-sm btn-white text-danger mr-2 d-flex"><i class="far fa-trash-alt mr-1"></i>删除</a>
+                            </td>
+                        </tr>
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

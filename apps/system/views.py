@@ -16,6 +16,19 @@ def index():
     return render_template('system/index.html')
 
 
+
+@bp.route('/sample/total')
+def sample_total():
+    return render_template('system/sample_total.html')
+
+
+
+@bp.route('/sample/handle')
+def sample_handle():
+    return render_template('system/sample_handle.html')
+
+
+
 class LoginView(views.MethodView):
     def get(self, message=None):
         return render_template('system/login.html', message=message)
