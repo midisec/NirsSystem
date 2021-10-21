@@ -7,6 +7,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 		<title>{% block title %}{% endblock %}</title>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
 		<!-- Favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='system/assets/img/favicon.png') }}">
@@ -95,7 +96,7 @@
 							</li>
 							<li name="index"><a href="{{ url_for('system.index') }}"><i class="feather-home"></i><span>首页</span></a>
 							</li>
-							<li name="sample" class="submenu"><a href="#"><i class="feather-list"></i> <span>功能实例</span><span class="menu-arrow"></span></a>
+							<li name="sample" class="submenu"><a href="#"><i class="feather-list"></i> <span>功能实例</span><span></span> <span></span></spand><span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
 									<li><a href="{{ url_for('system.sample_total') }}">样本信息</a></li>
 									<li><a href="{{ url_for('system.sample_handle') }}">样本处理</a></li>
@@ -106,7 +107,7 @@
                             <li class="submenu">
 								<a href="javascript:void(0);"><i class="feather-book"></i> <span>数据处理</span> <span class="menu-arrow"></span></a>
                                 <ul style="display: none;">
-									<li><a href="#">光谱数据可视化</a></li>
+									<li><a href="{{ url_for('system.visualization') }}">光谱数据可视化</a></li>
 
 								</ul>
 							</li>

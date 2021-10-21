@@ -6,6 +6,8 @@ from exts import db, csrf
 import config
 from datetime import datetime
 
+import pandas as pd
+from algorithm.visualization.pyechart2img import *
 
 bp = Blueprint("system", __name__,url_prefix='/system')
 
@@ -30,6 +32,24 @@ def sample_handle():
 def sample_result():
     return render_template('system/sample_result.html')
 
+
+@bp.route('/visualization/')
+def visualization():
+    return render_template('system/visualization.html')
+
+
+# 可视化的api
+@bp.route("/api/v1/visualization", methods=['POST'])
+def api_visualization():
+    data = request.form
+
+    file = request.files['file']
+    first = data.get('first')
+    end = data.get('end')
+
+    data1 = pd.read_csv(file)
+    c = line_base(int(first), int(end) + 1, data1)
+    return c.dump_options_with_quotes()
 
 
 class LoginView(views.MethodView):
