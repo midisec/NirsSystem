@@ -1,13 +1,14 @@
-from flask import Blueprint, views, render_template, request, redirect, url_for, session, jsonify
+from flask import Blueprint, views, render_template, request, redirect, url_for, session, jsonify, g
 from .forms import LoginForm, SampleForm
 from .models import User_Model
+from ..models import SampleModel
 from exts import db, csrf
 from utils import restful
+from .decorators import login_required, permission_required
 
 import config
 from datetime import datetime
 
-import pandas as pd
 from algorithm.visualization.pyechart2img import *
 from algorithm.nirspypredictor import NirspyPredictor
 from algorithm.visualization.data2imgplot import *
@@ -17,33 +18,41 @@ bp = Blueprint("system", __name__,url_prefix='/system')
 
 
 @bp.route('/index/')
-# @login_required
+@login_required
 def index():
     return render_template('system/index.html')
 
 
 @bp.route('/sample/total')
+@login_required
 def sample_total():
-    return render_template('system/sample_total.html')
+    context = {
+        'sample_list' : SampleModel.query.filter_by(author_id=g.system_user.id)
+    }
+    return render_template('system/sample_total.html', **context)
 
 
 @bp.route('/sample/handle')
+@login_required
 def sample_handle():
     return render_template('system/sample_handle.html')
 
 
 @bp.route('/sample/result')
+@login_required
 def sample_result():
     return render_template('system/sample_result.html')
 
 
 @bp.route('/visualization/')
+@login_required
 def visualization():
     return render_template('system/visualization.html')
 
 
 # 提交样本的api
 @bp.route('/api/v1/sample_create', methods=['POST'])
+@login_required
 def api_sample_create():
 
     data = request.form
@@ -56,6 +65,11 @@ def api_sample_create():
         sample_time = form.sample_time.data
 
         print(sample_name, sample_place, collector, sample_time)
+        # SampleModel
+        sample = SampleModel(sample_name=sample_name, sample_place=sample_place,
+                             collector=collector, sample_time=sample_time, author_id=g.system_user.id)
+        db.session.add(sample)
+        db.session.commit()
         return restful.success()
     else:
         # print(form.get_error())
@@ -65,6 +79,7 @@ def api_sample_create():
 
 # 数据处理的api
 @bp.route("/api/v1/sample_handle", methods=['POST'])
+@login_required
 def api_sample_handle():
     data = request.form
 
@@ -86,6 +101,7 @@ def api_sample_handle():
 
 # 可视化的api
 @bp.route("/api/v1/visualization", methods=['POST'])
+@login_required
 def api_visualization():
     data = request.form
 

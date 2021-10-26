@@ -20,11 +20,39 @@
     <!-- Datatables JS -->
     <script src="{{ url_for('static', filename='system/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url_for('static', filename='system/assets/plugins/datatables/datatables.min.js') }}"></script>
+    <!-- this page JS -->
+
+    <script src="https://cdn.bootcss.com/moment.js/2.22.0/moment-with-locales.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+        $(function () {
+            var myDate = new Date;
+            var year = myDate.getFullYear(); //获取当前年
+            var mon = myDate.getMonth() + 1; //获取当前月
+            var date = myDate.getDate(); //获取当前日
+            $('#datetimepicker1').datetimepicker({
+                format: 'YYYY-MM-DD',
+                locale: moment.locale('zh-cn'),
+                defaultDate: year+'-'+mon+'-'+date
+            });
+
+        });
+    </script>
+
+    <script src="{{ url_for('static',filename='common/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='common/sweetalert/mdalert.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='system/js/sample_total.js') }}"></script>
+
 {% endblock %}
 
 
 {% block extend_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='system/assets/plugins/datatables/datatables.min.css') }}">
+
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static',filename='common/sweetalert/sweetalert.css') }}">
 {% endblock %}
 
 {% block main_content %}
@@ -51,29 +79,19 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for sample in sample_list %}
                         <tr>
-                            <td>样本7</td>
-                            <td>经济楼</td>
-                            <td>学生5</td>
-                            <td>2021-04-22</td>
-                            <td>2021-04-22 20:28:56</td>
+                            <td>{{ sample.sample_name }}</td>
+                            <td>{{ sample.sample_place }}</td>
+                            <td>{{ sample.collector }}</td>
+                            <td>{{ sample.sample_time }}</td>
+                            <td>{{ sample.create_time }}</td>
                             <td class="text-right d-flex">
                                 <a href="#" class="btn btn-sm btn-white text-success mr-2 d-flex"><i class="far fa-edit mr-1"></i> 编辑</a>
                                 <a href="javascript:void(0);" class="btn btn-sm btn-white text-danger mr-2 d-flex"><i class="far fa-trash-alt mr-1"></i>删除</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>样本8</td>
-                            <td>经济楼</td>
-                            <td>学生5</td>
-                            <td>2021-04-22</td>
-                            <td>2021-04-22 20:28:56</td>
-                            <td class="text-right d-flex">
-                                <a href="#" class="btn btn-sm btn-white text-success mr-2 d-flex"><i class="far fa-edit mr-1"></i> 编辑</a>
-                                <a href="javascript:void(0);" class="btn btn-sm btn-white text-danger mr-2 d-flex"><i class="far fa-trash-alt mr-1"></i>删除</a>
-                            </td>
-                        </tr>
-
+                        {% endfor %}
 
 
 
@@ -99,31 +117,36 @@
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label" style="text-align: center;"><strong>样本名称:</strong></label>
                 <div class="col-lg-8">
-                    <input type="text" placeholder="名称" class="form-control">
+                    <input type="text" placeholder="名称" id="sample_name" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label" style="text-align: center;"><strong>样本地点:</strong></label>
                 <div class="col-lg-8">
-                    <input type="text" placeholder="名称" class="form-control">
+                    <input type="text" placeholder="地点" id="sample_place" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label" style="text-align: center;"><strong>采集人员:</strong></label>
                 <div class="col-lg-8">
-                    <input type="text" placeholder="名称" class="form-control">
+                    <input type="text" placeholder="名称" id="collector" class="form-control">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label" style="text-align: center;"><strong>样本日期:</strong></label>
-                <div class="col-lg-8">
-                    <input type="text" placeholder="名称" class="form-control">
+                <div class='col-lg-8 input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" id="sample_time"/>
+                    <span class="input-group-addon" style="padding: 6px 12px;font-size: 14px;text-align: center;background-color: #eee;border: 1px solid #ccc;">
+
+                        <span class="fas fa-calendar-alt" style="padding-top: 7px"></span>
+
+                    </span>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal">保存</button>
+            <button type="button" class="btn btn-success" id="send">保存</button>
         </div>
       </div>
     </div>

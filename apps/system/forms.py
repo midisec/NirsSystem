@@ -19,10 +19,9 @@ class SampleForm(BaseForm):
     collector = StringField(validators=[Length(2,20, message='请输入正确采集人员名称'), InputRequired(message='请输入采集人员名称')])
     sample_time = StringField(validators=[Length(2,20, message='请输入正确日期'), InputRequired(message='请输入样本日期')])
 
-
-    # def validate_sample_name(self, field):
-    #     sample_name = field.data
-    #     print("validata:")
-    #     print(sample_name)
-    #     if (SampleModel.query.filter_by(author_id=g.cms_user.id,sample_name=sample_name).first()):
-    #         raise ValidationError('样本名称已经存在了！')
+    def validate_sample_name(self, field):
+        sample_name = field.data
+        print("validata:")
+        print(sample_name)
+        if SampleModel.query.filter_by(author_id=g.system_user.id,sample_name=sample_name).first():
+            raise ValidationError('样本名称已经存在了！')
