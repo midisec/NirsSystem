@@ -1,13 +1,17 @@
-from flask import Blueprint, views, render_template, request, redirect, url_for, session
-from .forms import LoginForm
+from flask import Blueprint, views, render_template, request, redirect, url_for, session, jsonify
+from .forms import LoginForm, SampleForm
 from .models import User_Model
 from exts import db, csrf
+from utils import restful
 
 import config
 from datetime import datetime
 
 import pandas as pd
 from algorithm.visualization.pyechart2img import *
+from algorithm.nirspypredictor import NirspyPredictor
+from algorithm.visualization.data2imgplot import *
+
 
 bp = Blueprint("system", __name__,url_prefix='/system')
 
@@ -36,6 +40,48 @@ def sample_result():
 @bp.route('/visualization/')
 def visualization():
     return render_template('system/visualization.html')
+
+
+# 提交样本的api
+@bp.route('/api/v1/sample_create', methods=['POST'])
+def api_sample_create():
+
+    data = request.form
+    print(data)
+    form = SampleForm(request.form)
+    if form.validate():
+        sample_name = form.sample_name.data
+        sample_place = form.sample_place.data
+        collector = form.collector.data
+        sample_time = form.sample_time.data
+
+        print(sample_name, sample_place, collector, sample_time)
+        return restful.success()
+    else:
+        # print(form.get_error())
+        return restful.params_error(message=form.get_error())
+
+
+
+# 数据处理的api
+@bp.route("/api/v1/sample_handle", methods=['POST'])
+def api_sample_handle():
+    data = request.form
+
+    # predict result
+    file = request.files['file']
+    data1 = pd.read_csv(file)
+    nirspy = NirspyPredictor('default')
+    result = nirspy.predict(data1)
+
+    # old data draw
+    plot_url_old_data = draw_pic(data1)
+
+    # pre data draw
+    # judgment preprocessing method
+
+    return jsonify(
+        {'code': '200', 'data': {'old': plot_url_old_data}})
 
 
 # 可视化的api

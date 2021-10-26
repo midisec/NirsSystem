@@ -15,3 +15,8 @@ SQLALCHEMY_DATABASE_URI = DB_URI
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 SYSTEM_USER_ID = 'AMFASKFKA'
+
+
+path1 = os.path.abspath(__file__)
+PJ_PATH = os.path.dirname(path1)
+MODELS_PATH = PJ_PATH + "/algorithm/models/"

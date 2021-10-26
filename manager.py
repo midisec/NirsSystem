@@ -4,6 +4,7 @@ from app import create_app
 from exts import db
 
 from apps.system import models
+from apps.models import SampleModel
 
 User_Model = models.User_Model
 User_Role = models.USER_Role
