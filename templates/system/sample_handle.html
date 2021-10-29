@@ -60,31 +60,24 @@
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">样本名称:</label>
                             <div class="col-lg-9">
-                                <select class="select">
-                                    <option value="1">test1</option>
-                                    <option value="2">test2</option>
-                                    <option value="3">test3</option>
-                                    <option value="4">test4</option>
+                                <select class="select" name="samples" id="samples">
+                                    {% for sample in sample_list %}
+                                    <option value="{{ sample.id }}" data-id="{{ sample.id }}">{{ sample.sample_name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
                         </div>
-{#                         todo 选择完样本自动渲染样本至页面#}
+
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">样本地点:</label>
                             <div class="col-lg-9">
-                                <input type="text" placeholder="名称" class="form-control">
+                                <input type="text" placeholder="名称" class="form-control" name="sample_place" id="sample_place" disabled>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label">采集人员:</label>
                             <div class="col-lg-9">
-                                <input type="text" placeholder="名称" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label">样本日期:</label>
-                            <div class="col-lg-9">
-                                <input type="text" placeholder="名称" class="form-control">
+                                <input type="text" placeholder="名称" class="form-control" name="collector" id="collector" disabled>
                             </div>
                         </div>
 

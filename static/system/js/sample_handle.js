@@ -1,3 +1,39 @@
+var form = new FormData();
+form.append('id',$("#samples").find("option:selected").attr("data-id"));
+var csrftoken_input = $("meta[name='csrf-token']");
+var csrftoken = csrftoken_input.attr("content");
+// console.log(csrftoken);
+$.ajaxSetup({
+    'beforeSend':function(xhr,settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+            var csrftoken = $('meta[name=csrf-token]').attr('content');
+            xhr.setRequestHeader("X-CSRFToken", csrftoken)
+        }
+    }
+});
+
+$.ajax({
+    url:'/system/api/v1/sample_query',
+    type:'POST',
+    processData: false,
+    contentType: false,
+    data:form,
+    success:function (data) {
+        // console.log(data);
+        if (data['code'] == 200) {
+            console.log(data['data']);
+            $("#sample_place").val(data['data']['sample_place']);
+            $("#collector").val(data['data']['collector']);
+        }
+    },
+    fail:function (error) {
+        console.log(error);
+    }
+
+});
+
+
+
 
 function upload_done(){
     // console.log('done');
@@ -12,6 +48,54 @@ function upload_done(){
 
 
 $(function () {
+
+    $("#samples").on("change",
+    function() {
+        $("#sample_place").empty();
+        $("#collector").empty();
+
+        var form1 = new FormData();
+
+        form1.append('id',$("#samples").find("option:selected").attr("data-id"));
+        var csrftoken_input = $("meta[name='csrf-token']");
+        var csrftoken = csrftoken_input.attr("content");
+        console.log(csrftoken);
+        $.ajaxSetup({
+            'beforeSend':function(xhr,settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
+                    var csrftoken = $('meta[name=csrf-token]').attr('content');
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                }
+            }
+        });
+
+        $.ajax({
+            url:'/system/api/v1/sample_query',
+            type:'POST',
+            processData: false,
+            contentType: false,
+            data:form1,
+            success:function (data) {
+                // console.log(data);
+                if (data['code'] == 200) {
+                    $("#sample_place").val(data['data']['sample_place']);
+                    $("#collector").val(data['data']['collector']);
+                }
+
+            },
+            fail:function (error) {
+
+            }
+
+        });
+
+
+
+    });
+
+
+
+
     $("#send").click(function (event) {
         event.preventDefault();
         console.log(1);
@@ -23,6 +107,7 @@ $(function () {
         var form = new FormData();
         form.append("file", file);
         form.append('csrf_token',csrftoken);
+        form.append('id', $("#samples").find("option:selected").attr("data-id"));
 
         $.ajax({
             type: "POST",
@@ -59,4 +144,5 @@ $(function () {
     });
 
 
-})
+});
+

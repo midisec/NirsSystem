@@ -49,26 +49,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for sample in sample_list %}
                         <tr>
-                            <td>样本7</td>
-                            <td>经济楼</td>
-                            <td>学生5</td>
-                            <td>2021-04-22</td>
-                            <td>2021-04-22 20:28:56</td>
+                            <td>{{ sample.sample_name }}</td>
+                            <td>{{ sample.sample_place }}</td>
+                            <td>{{ sample.collector }}</td>
+                            <td>{{ sample.sample_time }}</td>
+                            <td>{{ sample.create_time }}</td>
                             <td class="text-right d-flex">
-                                <a href="#" class="btn btn-sm btn-white text-success mr-2 d-flex"><i class="fas fa-download mr-1"></i> 下载</a>
+                                <a href="/system/api/v1/sample_download/{{ sample.id }}" class="btn btn-sm btn-white text-success mr-2 d-flex"><i class="fas fa-download mr-1"></i> 下载</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>样本8</td>
-                            <td>经济楼</td>
-                            <td>学生5</td>
-                            <td>2021-04-22</td>
-                            <td>2021-04-22 20:28:56</td>
-                            <td class="text-right d-flex">
-                                <a href="#" class="btn btn-sm btn-white text-success mr-2 d-flex"><i class="fas fa-download mr-1"></i> 下载</a>
-                            </td>
-                        </tr>
+                        {% endfor %}
 
 
 

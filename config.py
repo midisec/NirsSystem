@@ -20,3 +20,4 @@ SYSTEM_USER_ID = 'AMFASKFKA'
 path1 = os.path.abspath(__file__)
 PJ_PATH = os.path.dirname(path1)
 MODELS_PATH = PJ_PATH + "/algorithm/models/"
+RESULT_PATH = PJ_PATH + "/result/"

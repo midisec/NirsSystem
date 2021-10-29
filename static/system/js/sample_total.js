@@ -32,7 +32,7 @@ $(function () {
                     mdalert.alertSuccessToast("样本上传成功");
                     $('#staticBackdrop').modal('toggle');
                     console.log("success");
-                    window.location.reload();
+                    // window.location.reload();
 
                 }
                 else{
